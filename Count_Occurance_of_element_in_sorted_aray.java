@@ -10,55 +10,64 @@ public static void main(String[] args) {
     }
 
     public static int solution(int[] arr, int target) {
+       
+        int first=firstocc(arr,target);
+        int second=secondocc(arr,target);
 
-        int lb = lowerBound(arr, target);
-        int ub = upperBound(arr, target);
-
-        // target not present
-        if(lb == arr.length || arr[lb] != target) {
-            return 0;
-        }
-
-        return ub - lb;
+        return second-first+1;
     }
 
-    public static int lowerBound(int[] arr, int target) {
 
-        int start = 0, end = arr.length - 1;
-        int ans = arr.length;
+    public static int firstocc(int [] arr,int target)
+    {
+        int start=0;
+        int end=arr.length-1;
+        int ans=-1;
+        
+        while(start<=end)
+        {
+            int mid=start+(end-start)/2;
 
-        while(start <= end) {
-
-            int mid = start + (end - start) / 2;
-
-            if(arr[mid] >= target) {
-                ans = mid;
-                end = mid - 1;
-            } else {
-                start = mid + 1;
+            if(arr[mid]==target)
+            {
+                ans=mid;
+                end=mid-1;
+            }
+            else if(arr[mid]>target)
+            {
+                end=mid-1;
+            }
+            else{
+                start=mid+1;
             }
         }
-
         return ans;
+            
     }
+     public static int secondocc(int [] arr,int target)
+    {
+        int start=0;
+        int end=arr.length-1;
+        int ans=-1;
+        
+        while(start<=end)
+        {
+            int mid=start+(end-start)/2;
 
-    public static int upperBound(int[] arr, int target) {
-
-        int start = 0, end = arr.length - 1;
-        int ans = arr.length;
-
-        while(start <= end) {
-
-            int mid = start + (end - start) / 2;
-
-            if(arr[mid] > target) {
-                ans = mid;
-                end = mid - 1;
-            } else {
-                start = mid + 1;
+            if(arr[mid]==target)
+            {
+                ans=mid;
+                start=mid+1;
+            }
+            else if(arr[mid]>target)
+            {
+                end=mid-1;
+            }
+            else{
+                start=mid+1;
             }
         }
-
         return ans;
+            
     }
 }
