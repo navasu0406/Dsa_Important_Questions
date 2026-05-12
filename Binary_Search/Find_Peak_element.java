@@ -1,3 +1,5 @@
+// find peak element in an array this problem is based on binary search where u fined weather 
+//arr[i]<arr[i+1] is then move right start=mid+1;
 public class Find_Peak_element {
     public static void main(String[] args) {
 
